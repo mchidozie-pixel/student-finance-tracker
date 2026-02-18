@@ -1,0 +1,92 @@
+[
+  {
+    "id": "txn_1771439498876_srsso4rqt",
+    "description": "TP",
+    "amount": 30,
+    "category": "Transport",
+    "date": "2026-02-17",
+    "createdAt": "2026-02-18T18:31:38.876Z",
+    "updatedAt": "2026-02-18T18:31:38.876Z"
+  },
+  {
+    "id": "txn_1771439499001_ab12cd34",
+    "description": "Lunch at campus",
+    "amount": 12.5,
+    "category": "Food",
+    "date": "2026-02-15",
+    "createdAt": "2026-02-15T12:20:00.000Z",
+    "updatedAt": "2026-02-15T12:20:00.000Z"
+  },
+  {
+    "id": "txn_1771439499002_xy98kl76",
+    "description": "Notebook",
+    "amount": 5.75,
+    "category": "Education",
+    "date": "2026-02-10",
+    "createdAt": "2026-02-10T09:00:00.000Z",
+    "updatedAt": "2026-02-10T09:00:00.000Z"
+  },
+  {
+    "id": "txn_1771439499003_qw45er89",
+    "description": "Gym membership",
+    "amount": 50,
+    "category": "Health",
+    "date": "2026-02-01",
+    "createdAt": "2026-02-01T08:00:00.000Z",
+    "updatedAt": "2026-02-01T08:00:00.000Z"
+  },
+  {
+    "id": "txn_1771439499004_ty67ui12",
+    "description": "Movie ticket",
+    "amount": 15,
+    "category": "Entertainment",
+    "date": "2026-01-28",
+    "createdAt": "2026-01-28T19:30:00.000Z",
+    "updatedAt": "2026-01-28T19:30:00.000Z"
+  },
+  {
+    "id": "txn_1771439499005_op34mn56",
+    "description": "Electricity bill",
+    "amount": 75.2,
+    "category": "Utilities",
+    "date": "2026-01-25",
+    "createdAt": "2026-01-25T14:10:00.000Z",
+    "updatedAt": "2026-01-25T14:10:00.000Z"
+  },
+  {
+    "id": "txn_1771439499006_gh78jk90",
+    "description": "Bus pass",
+    "amount": 45,
+    "category": "Transport",
+    "date": "2026-01-20",
+    "createdAt": "2026-01-20T07:45:00.000Z",
+    "updatedAt": "2026-01-20T07:45:00.000Z"
+  },
+  {
+    "id": "txn_1771439499007_lm12no34",
+    "description": "Coffee",
+    "amount": 4.5,
+    "category": "Food",
+    "date": "2026-01-18",
+    "createdAt": "2026-01-18T10:15:00.000Z",
+    "updatedAt": "2026-01-18T10:15:00.000Z"
+  },
+  {
+    "id": "txn_1771439499008_uv56wx78",
+    "description": "Online course",
+    "amount": 120,
+    "category": "Education",
+    "date": "2026-01-10",
+    "createdAt": "2026-01-10T16:00:00.000Z",
+    "updatedAt": "2026-01-10T16:00:00.000Z"
+  },
+  {
+    "id": "txn_1771439499009_za91bc23",
+    "description": "Freelance income",
+    "amount": 300,
+    "category": "Income",
+    "date": "2026-01-05",
+    "createdAt": "2026-01-05T11:00:00.000Z",
+    "updatedAt": "2026-01-05T11:00:00.000Z"
+  }
+]
