@@ -4,7 +4,7 @@ A web application designed to help students track expenses, monitor spending tre
 
 ## Live Demo
 
-*Coming soon* (You can deploy via GitHub Pages later)
+*Coming soon* 
 
 ## Repository
 
