@@ -1,10 +1,14 @@
 # Student Finance Tracker
 
-A web application to help students track expenses, monitor spending trends, and validate financial input using regular expressions.
+A web application designed to help students track expenses, monitor spending trends, and validate financial input using regular expressions.
 
 ## Live Demo
 
-[GitHub Pages Link](https://YOUR_GITHUB_USERNAME.github.io/student-finance-tracker/)
+*Coming soon* (You can deploy via GitHub Pages later)
+
+## Repository
+
+[View on GitHub](https://github.com/mchidozie-pixel/student-finance-tracker/tree/main)
 
 ## Features
 
@@ -17,34 +21,38 @@ A web application to help students track expenses, monitor spending trends, and 
 - Persistent storage with localStorage
 - Currency support (USD, EUR, GBP)
 - Accessible and keyboard-friendly interface
+- Mobile-responsive design
 
 ## Project Structure
 
-- `index.html` — Main HTML file
-- `style.css` — CSS styling
-- `app.js` — JavaScript logic
-- `seed.json` — Sample transaction data
-- `README.md` — Project documentation
+- `index.html` – Main HTML file with all sections (Dashboard, Records, Add Transaction, Search, Settings, About)  
+- `style.css` – Contains all styling, including layout, color themes, responsive design, and component styles  
+- `app.js` – Handles application logic: form validation, storage, dashboard updates, table and card rendering, sorting, search, and settings  
+- `seed.json` – Optional JSON file with sample transactions to pre-fill your app for testing/demo purposes  
+- `README.md` – This file explaining the project
 
 ## About `seed.json`
 
-`seed.json` contains sample transaction records in JSON format. It is used to populate the app initially so reviewers or users can see how it works without adding data manually. The app can load from `seed.json` but stores live data in the browser using `localStorage`. This ensures data persists between sessions.
+`seed.json` contains pre-filled sample transaction records in JSON format. It allows anyone reviewing your app to see it in action immediately. It shows the structure of your data, including:
 
-## How to Run
+- `id` – Unique transaction identifier  
+- `description` – What the expense is  
+- `amount` – Transaction amount  
+- `category` – Category of expense  
+- `date` – Date of the transaction  
+- `createdAt` / `updatedAt` – Timestamps for record management  
 
-1. Open `index.html` in a web browser.
-2. The app loads sample transactions from `seed.json`.
-3. Add, edit, or delete transactions using the interface.
-4. Use regex search for filtering categories or descriptions.
-5. Refresh the page to verify data is stored in localStorage.
+> Note: `seed.json` is **not the same as `localStorage`**. Your app can load from `seed.json` initially, but live data will be stored in the browser.
 
-## Accessibility
+### Example JSON Record
 
-- Skip-to-content link included
-- Proper labels and focus indicators
-- Keyboard navigation supported
-- ARIA live region for alerts
-
-## Academic Integrity
-
-Completed individually.
+```json
+{
+  "id": "txn_1",
+  "description": "Lunch at cafeteria",
+  "amount": 12.50,
+  "category": "Food",
+  "date": "2025-09-25",
+  "createdAt": "2025-09-25T10:00:00",
+  "updatedAt": "2025-09-25T10:00:00"
+}
