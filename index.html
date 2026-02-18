@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Finance Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <header>
+        <h1>Student Finance Tracker</h1>
+        <nav>
+            <button class="nav-btn active" data-section="dashboard">Dashboard</button>
+            <button class="nav-btn" data-section="records">Records</button>
+            <button class="nav-btn" data-section="add">Add Transaction</button>
+            <button class="nav-btn" data-section="search">Search</button>
+            <button class="nav-btn" data-section="settings">Settings</button>
+            <button class="nav-btn" data-section="about">About</button>
+        </nav>
+    </header>
+
+    <main id="main">
+        <div class="aria-live" id="aria-live" role="status" aria-live="polite"></div>
+        <div id="alert" class="alert"></div>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="active">
+            <h2>Dashboard</h2>
+
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-value" id="total-records">0</div>
+                    <div class="stat-label">Total Records</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="total-amount">$0.00</div>
+                    <div class="stat-label">Total Spending</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="top-category">—</div>
+                    <div class="stat-label">Top Category</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Spending Cap Status</h3>
+                <div class="stat-box" id="cap-status">
+                    <div class="stat-value" id="cap-amount">$0.00</div>
+                    <div class="stat-label">Current / Cap</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Last 7 Days Trend</h3>
+                <div class="trend-chart" id="trend-chart"></div>
+            </div>
+        </section>
+
+        <!-- Records Section -->
+        <section id="records">
+            <h2>All Transactions</h2>
+            
+            <div id="records-view">
+                <div class="search-controls">
+                    <input type="text" id="quick-search" placeholder="Quick search by description...">
+                    <button id="export-btn" class="secondary">Export JSON</button>
+                    <button id="import-btn-show" class="secondary">Import JSON</button>
+                </div>
+
+                <div id="import-section" style="display:none; margin-bottom: 1rem;">
+                    <textarea id="import-json" placeholder="Paste JSON here..." rows="6"></textarea>
+                    <button id="import-confirm" class="secondary">Import</button>
+                    <button id="import-cancel" class="secondary">Cancel</button>
+                </div>
+
+                <div id="table-view">
+                    <table id="transactions-table">
+                        <thead>
+                            <tr>
+                                <th class="sortable" data-field="date">Date</th>
+                                <th class="sortable" data-field="description">Description</th>
+                                <th>Category</th>
+                                <th class="sortable" data-field="amount">Amount</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactions-tbody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="cards-view" class="grid-2" style="display:none; margin-top: 1rem;"></div>
+            </div>
+        </section>
+
+        <!-- Add/Edit Transaction Section -->
+        <section id="add">
+            <h2 id="form-title">Add New Transaction</h2>
+            <div class="card">
+                <form id="transaction-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="description">Description *</label>
+                            <input type="text" id="description" required>
+                            <div class="error" id="error-description"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Amount *</label>
+                            <input type="text" id="amount" placeholder="0.00" required>
+                            <div class="error" id="error-amount"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="category">Category *</label>
+                            <select id="category" required>
+                                <option value="">Select a category</option>
+                                <option>Food</option>
+                                <option>Transport</option>
+                                <option>Entertainment</option>
+                                <option>Education</option>
+                                <option>Utilities</option>
+                                <option>Health</option>
+                                <option>Other</option>
+                            </select>
+                            <div class="error" id="error-category"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date *</label>
+                            <input type="date" id="date" required>
+                            <div class="error" id="error-date"></div>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="duplicate-check" aria-label="Check for duplicate words">
+                        <label for="duplicate-check">Check for duplicate words (e.g., 'coffee coffee')</label>
+                    </div>
+
+                    <div class="form-row">
+                        <button type="submit">Save Transaction</button>
+                        <button type="reset" class="secondary">Clear</button>
+                        <button type="button" id="cancel-edit" class="secondary" style="display:none;">Cancel Edit</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section id="search">
+            <h2>Regex Search</h2>
+            <div class="card">
+                <div class="form-group">
+                    <label for="regex-pattern">Search Pattern</label>
+                    <input type="text" id="regex-pattern" placeholder="e.g., ^[A-Z].*|coffee coffee">
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="case-insensitive" checked>
+                    <label for="case-insensitive">Case-insensitive</label>
+                </div>
+
+                <button id="search-btn">Search</button>
+                <div id="search-error" class="error"></div>
+
+                <div id="search-results" style="margin-top: 1.5rem;"></div>
+            </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings">
+            <h2>Settings</h2>
+            <div class="card">
+                <h3>Currency Settings</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="base-currency">Base Currency</label>
+                        <select id="base-currency">
+                            <option value="USD">USD ($)</option>
+                            <option value="EUR">EUR (€)</option>
+                            <option value="GBP">GBP (£)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Exchange Rates (to Base Currency)</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="rate-eur">EUR Rate</label>
+                        <input type="number" id="rate-eur" step="0.01" placeholder="1.10">
+                    </div>
+                    <div class="form-group">
+                        <label for="rate-gbp">GBP Rate</label>
+                        <input type="number" id="rate-gbp" step="0.01" placeholder="1.27">
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 2rem;">Financial Goals</h3>
+                <div class="form-group">
+                    <label for="spending-cap">Monthly Spending Cap ($)</label>
+                    <input type="number" id="spending-cap" step="0.01" placeholder="500.00">
+                </div>
+
+                <button id="save-settings">Save Settings</button>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2>About This App</h2>
+            <div class="card">
+                <div class="about-content">
+                    <h3>Purpose</h3>
+                    <p>
+                        Student Finance Tracker helps you manage your personal finances effectively. 
+                        Track your spending, set budgets, and analyze your financial habits with 
+                        interactive dashboards and advanced search capabilities.
+                    </p>
+
+                    <h3>Features</h3>
+                    <ul style="margin-left: 1rem; margin-bottom: 1rem;">
+                        <li>Real-time spending dashboard with statistics</li>
+                        <li>Local data storage with import/export</li>
+                        <li>Advanced regex-based transaction search</li>
+                        <li>Multi-currency support with custom rates</li>
+                        <li>Fully responsive mobile-first design</li>
+                        <li>Complete accessibility compliance</li>
+                    </ul>
+
+                    <h3>Regex Patterns Used</h3>
+                    <table style="margin-top: 1rem;">
+                        <tr style="background: var(--bg);">
+                            <th style="text-align: left;">Pattern</th>
+                            <th style="text-align: left;">Purpose</th>
+                            <th style="text-align: left;">Example</th>
+                        </tr>
+                        <tr>
+                            <td>/^\S(?:.*\S)?$/</td>
+                            <td>Description validation (no leading/trailing spaces)</td>
+                            <td>Lunch</td>
+                        </tr>
+                        <tr>
+                            <td>/^(0|[1-9]\d*)(\.\d{1,2})?$/</td>
+                            <td>Amount validation (numeric with 2 decimals)</td>
+                            <td>12.50</td>
+                        </tr>
+                        <tr>
+                            <td>/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/</td>
+                            <td>Date validation (YYYY-MM-DD)</td>
+                            <td>2025-09-29</td>
+                        </tr>
+                        <tr>
+                            <td>/^[A-Za-z]+(?:[ -][A-Za-z]+)*$/</td>
+                            <td>Category validation (letters, spaces, hyphens)</td>
+                            <td>Fast Food</td>
+                        </tr>
+                        <tr>
+                            <td>/\b(\w+)\s+\1\b/i</td>
+                            <td>Duplicate word detection (advanced backreference)</td>
+                            <td>coffee coffee</td>
+                        </tr>
+                    </table>
+
+                    <h3 style="margin-top: 2rem;">Keyboard Navigation</h3>
+                    <ul style="margin-left: 1rem; margin-bottom: 1rem;">
+                        <li><strong>Tab</strong> - Navigate through form fields and buttons</li>
+                        <li><strong>Enter</strong> - Submit form or activate button</li>
+                        <li><strong>Shift + Tab</strong> - Navigate backwards</li>
+                        <li><strong>Arrow Keys</strong> - Navigate table headers for sorting</li>
+                    </ul>
+
+                    <h3>Contact</h3>
+                    <p>
+                        GitHub: <a href="https://github.com/mchidozie-pixel" target="_blank">GitHub Profile</a><br>
+                        Email: <a href="mailto:m.chidozie@alustudent.com">student@example.com</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Student Finance Tracker. Built with for financial literacy.</p>
+        <p>
+            <a href="https://github.com/mchidozie-pixel" target="_blank">GitHub</a> | 
+            <a href="mailto:m.chidozie@alustudent.com">Contact</a> 
+        </p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
