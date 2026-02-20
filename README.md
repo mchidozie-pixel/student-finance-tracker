@@ -1,3 +1,4 @@
+Video Demo: [Watch here](https://drive.google.com/file/d/1LCNQpZZ51sX4fTm8BbY2eFhp7_1CJyCc/view?usp=sharing)
 # Student Finance Tracker
 
 A web application designed to help students track expenses, monitor spending trends, and validate financial input using regular expressions.
