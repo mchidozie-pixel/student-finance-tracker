@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Regex Validation Tests</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  .pass { color: green; }
+  .fail { color: red; }
+  li { margin: 6px 0; }
+</style>
+</head>
+<body>
+
+<h1>Regex Validation Tests</h1>
+<ul id="results"></ul>
+
+<script>
+const results = document.getElementById("results");
+
+function test(name, condition){
+  const li = document.createElement("li");
+  li.textContent = name + ": " + (condition ? "PASS" : "FAIL");
+  li.className = condition ? "pass" : "fail";
+  results.appendChild(li);
+}
+
+/* ===== REGEX RULES FROM MAIN APP ===== */
+
+// Description (no leading/trailing space)
+const descRegex = /^\S(?:.*\S)?$/;
+test("Description valid - 'Lunch'", descRegex.test("Lunch"));
+test("Description invalid - leading space", !descRegex.test(" Lunch"));
+test("Description invalid - trailing space", !descRegex.test("Lunch "));
+
+// Amount (numeric, max 2 decimals, no leading zeros except '0')
+const amountRegex = /^(0|[1-9]\d*)(\.\d{1,2})?$/;
+test("Amount valid - '10'", amountRegex.test("10"));
+test("Amount valid - '10.99'", amountRegex.test("10.99"));
+test("Amount valid - '0'", amountRegex.test("0"));
+test("Amount invalid - '10.999'", !amountRegex.test("10.999"));
+test("Amount invalid - leading zero '01'", !amountRegex.test("01"));
+
+// Date (YYYY-MM-DD with basic month/day checks)
+const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+test("Date valid - '2026-02-17'", dateRegex.test("2026-02-17"));
+test("Date invalid - wrong order '17-02-2026'", !dateRegex.test("17-02-2026"));
+test("Date invalid - month 13 '2026-13-01'", !dateRegex.test("2026-13-01"));
+
+// Category (letters, spaces, hyphens)
+const categoryRegex = /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/;
+test("Category valid - 'Fast Food'", categoryRegex.test("Fast Food"));
+test("Category valid - 'Utilities'", categoryRegex.test("Utilities"));
+test("Category invalid - contains digits 'Food123'", !categoryRegex.test("Food123"));
+test("Category invalid - empty", !categoryRegex.test(""));
+
+// Duplicate word detection (case-insensitive backreference)
+const duplicateRegex = /\b(\w+)\s+\1\b/i;
+test("Duplicate words detected - 'coffee coffee'", duplicateRegex.test("coffee coffee"));
+test("Duplicate words detected - 'coffee Coffee' (case-insensitive)", duplicateRegex.test("coffee Coffee"));
+test("No duplicate - 'coffee tea'", !duplicateRegex.test("coffee tea"));
+
+// Safe regex compile helper
+function safeRegex(pattern){
+  try { return new RegExp(pattern, "i"); }
+  catch { return null; }
+}
+test("Safe regex compile valid pattern 'food'", safeRegex("food") !== null);
+test("Safe regex compile invalid pattern '[abc'", safeRegex("[abc") === null);
+</script>
+</body>
+</html>
+```// filepath: c:\Users\leiny\Pictures\HTML,CSS,JS\7-Day JavaScript Mastery Plan.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Regex Validation Tests</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  .pass { color: green; }
+  .fail { color: red; }
+  li { margin: 6px 0; }
+</style>
+</head>
+<body>
+
+<h1>Regex Validation Tests</h1>
+<ul id="results"></ul>
+
+<script>
+const results = document.getElementById("results");
+
+function test(name, condition){
+  const li = document.createElement("li");
+  li.textContent = name + ": " + (condition ? "PASS" : "FAIL");
+  li.className = condition ? "pass" : "fail";
+  results.appendChild(li);
+}
+
+/* ===== REGEX RULES FROM MAIN APP ===== */
+
+// Description (no leading/trailing space)
+const descRegex = /^\S(?:.*\S)?$/;
+test("Description valid - 'Lunch'", descRegex.test("Lunch"));
+test("Description invalid - leading space", !descRegex.test(" Lunch"));
+test("Description invalid - trailing space", !descRegex.test("Lunch "));
+
+// Amount (numeric, max 2 decimals, no leading zeros except '0')
+const amountRegex = /^(0|[1-9]\d*)(\.\d{1,2})?$/;
+test("Amount valid - '10'", amountRegex.test("10"));
+test("Amount valid - '10.99'", amountRegex.test("10.99"));
+test("Amount valid - '0'", amountRegex.test("0"));
+test("Amount invalid - '10.999'", !amountRegex.test("10.999"));
+test("Amount invalid - leading zero '01'", !amountRegex.test("01"));
+
+// Date (YYYY-MM-DD with basic month/day checks)
+const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+test("Date valid - '2026-02-17'", dateRegex.test("2026-02-17"));
+test("Date invalid - wrong order '17-02-2026'", !dateRegex.test("17-02-2026"));
+test("Date invalid - month 13 '2026-13-01'", !dateRegex.test("2026-13-01"));
+
+// Category (letters, spaces, hyphens)
+const categoryRegex = /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/;
+test("Category valid - 'Fast Food'", categoryRegex.test("Fast Food"));
+test("Category valid - 'Utilities'", categoryRegex.test("Utilities"));
+test("Category invalid - contains digits 'Food123'", !categoryRegex.test("Food123"));
+test("Category invalid - empty", !categoryRegex.test(""));
+
+// Duplicate word detection (case-insensitive backreference)
+const duplicateRegex = /\b(\w+)\s+\1\b/i;
+test("Duplicate words detected - 'coffee coffee'", duplicateRegex.test("coffee coffee"));
+test("Duplicate words detected - 'coffee Coffee' (case-insensitive)", duplicateRegex.test("coffee Coffee"));
+test("No duplicate - 'coffee tea'", !duplicateRegex.test("coffee tea"));
+
+// Safe regex compile helper
+function safeRegex(pattern){
+  try { return new RegExp(pattern, "i"); }
+  catch { return null; }
+}
+test("Safe regex compile valid pattern 'food'", safeRegex("food") !== null);
+test("Safe regex compile invalid pattern '[abc'", safeRegex("[abc") === null);
+</script>
+</body>
+</html>
