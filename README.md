@@ -1,58 +1,60 @@
 # Student Finance Tracker
 
-A web application designed to help students track expenses, monitor spending trends, and validate financial input using regular expressions.
+The Student Finance Tracker is a web application I built to help students manage and monitor daily spending. The app allows users to record transactions, analyze spending trends, and ensure correct input using regex validation.
 
-## Live Demo
+## Live App
+https://mchidozie-pixel.github.io/student-finance-tracker/
 
-[Watch here](https://drive.google.com/file/d/1LCNQpZZ51sX4fTm8BbY2eFhp7_1CJyCc/view?usp=drive_link) 
+## Demo Video
+https://drive.google.com/file/d/1LCNQpZZ51sX4fTm8BbY2eFhp7_1CJyCc/view?usp=drive_link
 
 ## Repository
+https://github.com/mchidozie-pixel/student-finance-tracker
 
-[View on GitHub](https://github.com/mchidozie-pixel/student-finance-tracker/tree/main)
+## Theme
+This project focuses on student financial awareness and expense tracking, helping students understand spending habits and stay within budgets.
 
 ## Features
-
 - Add, edit, and delete transactions
-- Dashboard summary with total balance and spending overview
-- 7-day spending trend
+- Dashboard showing total spending and insights
+- 7-day spending trend visualization
 - Category breakdown of expenses
 - Regex-based form validation
-- Custom regex search
-- Persistent storage with localStorage
+- Regex search with safe compilation
+- Import and export transactions in JSON format
+- Persistent storage using localStorage
 - Currency support (USD, EUR, GBP)
-- Accessible and keyboard-friendly interface
-- Mobile-responsive design
+- Mobile-responsive and keyboard-accessible interface
+
+## Regex Catalog
+- Description: Prevents leading/trailing spaces (Valid: Lunch, Invalid: " Lunch")
+- Amount: Numeric with max 2 decimals (Valid: 10.99, Invalid: 01)
+- Date: YYYY-MM-DD format (Valid: 2026-02-17, Invalid: 17-02-2026)
+- Category: Letters and spaces only (Valid: Fast Food, Invalid: Food123)
+- Duplicate words: Detects repeated words (Valid: coffee coffee, Invalid: coffee tea)
+
+## Keyboard Map
+- Tab → Navigate inputs
+- Enter → Submit transaction
+- Esc → Reset form or close modal
+- Arrow keys → Navigate dropdown elements
+
+## Accessibility Notes
+- Semantic HTML structure
+- ARIA live updates for dashboard statistics
+- Visible focus indicators for keyboard navigation
+- Accessible color contrast
+
+## Running Tests
+Opening tests.html in a browser runs validation checks that display PASS or FAIL results for each regex rule.
+
+## About seed.json
+The seed.json file contains sample transaction data used for testing and demonstrating import/export functionality. It includes id, description, amount, category, date, and timestamps.
 
 ## Project Structure
-
-- `index.html` – Main HTML file with all sections (Dashboard, Records, Add Transaction, Search, Settings, About)  
-- `style.css` – Contains all styling, including layout, color themes, responsive design, and component styles  
-- `app.js` – Handles application logic: form validation, storage, dashboard updates, table and card rendering, sorting, search, and settings  
-- `seed.json` – Optional JSON file with sample transactions to pre-fill your app for testing/demo purposes  
-- `README.md` – This file explaining the project
-
-## About `seed.json`
-
-`seed.json` contains pre-filled sample transaction records in JSON format. It allows anyone reviewing your app to see it in action immediately. It shows the structure of your data, including:
-
-- `id` – Unique transaction identifier  
-- `description` – What the expense is  
-- `amount` – Transaction amount  
-- `category` – Category of expense  
-- `date` – Date of the transaction  
-- `createdAt` / `updatedAt` – Timestamps for record management  
-
-> Note: `seed.json` is **not the same as `localStorage`**. Your app can load from `seed.json` initially, but live data will be stored in the browser.
-
-### Example JSON Record
-
-```json
-{
-  "id": "txn_1",
-  "description": "Lunch at cafeteria",
-  "amount": 12.50,
-  "category": "Food",
-  "date": "2025-09-25",
-  "createdAt": "2025-09-25T10:00:00",
-  "updatedAt": "2025-09-25T10:00:00"
-}
+- index.html – Main application layout
+- style.css – Styling and responsive design
+- app.js – Application logic and state management
+- seed.json – Sample transaction records
+- tests.html – Regex validation test page
+- README.md – Project documentation
